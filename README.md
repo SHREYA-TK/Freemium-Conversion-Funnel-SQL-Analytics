@@ -1,8 +1,10 @@
-# 🧮 Freemium Conversion Funnel – SQL Analytics
+#  Freemium Conversion Funnel – SQL Analytics
 *Building the Foundation for Data-Driven User Journey Insights*
 
 ### 🌟 Project Overview
 This project forms the data-logic foundation of my Power BI dashboard, where I visualize how users move through a freemium product’s funnel — from signup → activation → conversion → retention.
+
+The purpose of this SQL project was to design and validate the data model, perform key analyses on user behavior, and generate clean tables that later powered the Power BI Dashboard.
 
 👉 **Companion visualization:** [Freemium Conversion Funnel – Power BI Dashboard](INSERT_POWERBI_REPO_LINK_HERE)
 
@@ -22,14 +24,12 @@ This project forms the data-logic foundation of my Power BI dashboard, where I v
 
 ### 🧠 SQL Concepts Applied
 - CTEs for step-by-step funnel logic.
-- CASE WHEN for flag creation.
-- Aggregates for KPIs.
+- CASE WHEN for flag creation ( activation, conversion, churn )
+- Aggregate functions ( COUNT, SUM, AVG ) for KPIs.
 - Joins between funnel and feedback tables.
-- Conditional filtering for retention.
-- Window functions for sequencing.
+- Conditional filtering for 30-day retention calculation
+- Window functions(ROW_NUMBER, LAG) for user-level sequencing.
 
-### 🧮 Key Queries & Logic
-(Queries listed here — same as conversation above)
 
 ### 📈 KPIs Generated
 | Metric | Formula | Description |
@@ -40,24 +40,22 @@ This project forms the data-logic foundation of my Power BI dashboard, where I v
 | Retention 30D Rate | AVG(Retained_30D = TRUE) | Retained 30+ days |
 | Churn Rate | 1 – Retention Rate | Churn within 30 days |
 
-### 🧹 Data Validation & Transition
-20 → 300 rows in Power BI. 11 blank activation users found — realistic inactive users, retained for analysis.
+### 🧹 Data Validation & Transition to Power BI
+After confirming that all logic worked correctly on 20 rows, the tables are exported to CSV. When scaling to 300 rows in Power BI, 11 blank activation users appeared - new users who signed up but never activated.
+✅These blanks were kept intentionally to simulate real-world user drop-off behavior.
 
-### 🧭 Insights
-1. 70% activated after signup.
-2. Average rating >4.0 for top features.
-3. Retention drop after 30 days.
 
-### 🗂️ File Structure
-/Freemium_Conversion_Funnel_SQL
-├── SQL_Queries.sql
-├── conversion_funnel.csv
-├── feedback.csv
-└── README.md
+### 🧭 Business Insights from SQL Phase
+1. Roughly 70 % of users activated after signup — but only a fraction converted, showing friction in the post-activation stage.
+2. Average rating > 4.0 for key features indicates good satisfaction levels.
+3. Retention drop after 30 days suggests users lose motivation quickly post-activation.
 
-### 🧰 Tools
-PostgreSQL, DBeaver, Excel/CSV, Power BI
 
-### ✨ Author
-**Created by:** Shreya (Coco)
-**Linked Project:** [Power BI Dashboard](INSERT_POWERBI_REPO_LINK_HERE)
+### 🧰 Tools and Tech Stack
+- PostgreSQL 15 – query design & data processing
+- DBeaver – IDE for query execution and export
+- Excel/CSV – lightweight validation
+- Power BI Desktop – next-phase visualization
+
+
+### ✨ **Linked Project:** [Power BI Dashboard](INSERT_POWERBI_REPO_LINK_HERE)
