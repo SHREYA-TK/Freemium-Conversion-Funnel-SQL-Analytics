@@ -6,7 +6,7 @@ This project forms the data-logic foundation of my Power BI dashboard, where I v
 
 The purpose of this SQL project was to design and validate the data model, perform key analyses on user behavior, and generate clean tables that later powered the Power BI Dashboard.
 
-👉 **Companion visualization:** [Freemium Conversion Funnel – Power BI Dashboard](INSERT_POWERBI_REPO_LINK_HERE)
+👉 **Companion visualization:** [Freemium Conversion Funnel – Power BI Dashboard](https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard)
 
 ### 🎯 Objectives
 1. Create an activation-conversion funnel using SQL.
@@ -58,4 +58,4 @@ After confirming that all logic worked correctly on 20 rows, the tables are expo
 - Power BI Desktop – next-phase visualization
 
 
-### ✨ **Linked Project:** [Power BI Dashboard](INSERT_POWERBI_REPO_LINK_HERE)
+### ✨ **Linked Project:** [Power BI Dashboard](https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard)
