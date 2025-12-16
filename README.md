@@ -1,52 +1,54 @@
+
 # Freemium Conversion Funnel — SQL Analytics
 
-A complete SQL-driven analysis of a freemium product’s user journey.
-This project models the conversion funnel (Signup → Activation → Conversion → 30-Day Retention),
-calculates performance KPIs, and uncovers insights that later power the companion Power BI dashboard.
+A complete SQL-driven analysis of a freemium product’s user journey.  
+This project models the conversion funnel (**Signup → Activation → Conversion → 30-Day Retention**), calculates core product KPIs, and uncovers actionable insights that power a companion Power BI dashboard.
 
-**Companion Power BI Project:**  
-https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard
+---
 
-**Note:**  
-Feedback insights are **not** included in this SQL analysis because the SQL dataset does not contain rating or feedback fields.
-Those insights are explored only in the Power BI project, which uses an additional feedback table imported directly into Power BI.
+## Companion Power BI Project
+🔗 https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard
+
+**Note**  
+Feedback insights are **not included** in this SQL analysis because the SQL dataset does not contain user ratings or feedback fields.  
+Those insights are explored exclusively in the Power BI project, which uses an additional feedback table imported directly into Power BI.
 
 ---
 
 ## 1. Project Overview
 
-Freemium products rely on their ability to move users smoothly from initial signup to long-term retention.
-This SQL project focuses on measuring funnel health, identifying drop-offs, comparing regional performance,
-and producing a clean analytical dataset for BI tools.
+Freemium products depend heavily on smooth user progression from signup to long-term retention.  
+This project focuses on understanding funnel health, identifying where users drop off, and comparing regional performance using SQL as the analytical truth layer.
 
-SQL acts as the analytical truth layer; Power BI builds on top of these outputs to tell the visual story.
-
----
-
-## 2. Funnel Diagram
-
-![Freemium funnel overview](funnel.png)
+SQL outputs from this project are later used by Power BI to create visual storytelling.
 
 ---
 
-## 3. Key KPIs (from SQL)
+## 2. Dataset Description
 
-| Metric | Value |
-| --- | ---: |
-| Total signups | 289 |
-| Activated users | 175 |
-| Converted users | 59 |
-| Retained 30 days | 2 |
-| Activation rate | 60.6% |
-| Conversion rate (activated → converted) | 33.7% |
-| Overall conversion | 20.4% |
-| 30-day retention | 0.69% |
-| Churn | 99.7% |
-| Avg days to convert | 7.90 |
+The dataset represents user-level activity for a freemium digital product and includes:
+- User signups
+- Activation status
+- Conversion events
+- Retention indicators
+- Geographic region
+
+Each row represents a unique user and their journey stage within the product lifecycle.
 
 ---
 
+## 3. Key Business Questions
+
+This analysis was designed to answer the following product questions:
+
+- Where do users drop off in the conversion funnel?
+- How effective is user activation at driving conversion?
+- Which regions perform better or worse across the funnel stages?
+- Where should product teams focus optimisation efforts?
+
+---
 ## 4. Funnel Performance Breakdown
+![Freemium funnel overview](funnel.png)
 
 ### 4.1 Signups → Activation (289 → 175)
 
@@ -63,80 +65,108 @@ This suggests premium value is not being communicated strongly enough during the
 The steepest drop occurs after conversion.
 Even paying users do not remain engaged long-term, highlighting weak habit formation.
 
+
+## 5. Key KPIs 
+
+| Metric | Value |
+| --- | ---: |
+| Total signups | 289 |
+| Activated users | 175 |
+| Converted users | 59 |
+| Retained 30 days | 2 |
+| Activation rate | 60.6% |
+| Conversion rate (activated → converted) | 33.7% |
+| Overall conversion | 20.4% |
+| 30-day retention | 0.69% |
+| Churn | 99.7% |
+| Avg days to convert | 7.90 |
+
 ---
+## 6. SQL Analysis
 
-## 5. SQL Analysis
+### 6.1 Funnel Performance Analysis
 
-### 5.1 Funnel Metrics
+The funnel analysis quantifies how many users progress through each stage of the product journey.  
+This helps identify friction points that prevent users from reaching conversion or long-term retention.
 
+#### SQL Query
 ```sql
 SELECT
-    COUNT(*) AS signups,
-    COUNT(CASE WHEN activated_flag = 1 THEN 1 END) AS activated,
-    COUNT(CASE WHEN converted_flag = 1 THEN 1 END) AS converted,
-    COUNT(CASE WHEN retained_30d_flag = 1 THEN 1 END) AS retained_30d
-FROM conversion_funnel_enriched;
+    COUNT(*) AS total_signups,
+    SUM(CASE WHEN activated = TRUE THEN 1 ELSE 0 END) AS activated_users,
+    SUM(CASE WHEN converted = TRUE THEN 1 ELSE 0 END) AS converted_users,
+    SUM(CASE WHEN retained_30_days = TRUE THEN 1 ELSE 0 END) AS retained_30_days
+FROM users;
 ```
+
+#### Insight
+
+While the product attracts a healthy number of signups, a significant drop occurs between activation and conversion.  
+This indicates that onboarding alone is not sufficient to drive monetisation.  
+The most severe drop-off is observed at the retention stage, suggesting weak habit formation or insufficient post-conversion engagement mechanisms.
 
 ---
 
-### 5.2 Region-wise Funnel Performance (SQL)
+### 6.2 Regional Performance Analysis
 
+Regional analysis compares user behaviour across different geographies to uncover market-level opportunities and weaknesses.
+
+#### SQL Query
 ```sql
 SELECT
     region,
-    COUNT(*) AS signups,
-    COUNT(CASE WHEN activated_flag = 1 THEN 1 END) AS activated,
-    COUNT(CASE WHEN converted_flag = 1 THEN 1 END) AS converted
-FROM conversion_funnel_enriched
+    COUNT(*) AS total_users,
+    SUM(CASE WHEN activated = TRUE THEN 1 ELSE 0 END) AS activated_users,
+    SUM(CASE WHEN converted = TRUE THEN 1 ELSE 0 END) AS converted_users
+FROM users
 GROUP BY region
-ORDER BY signups DESC;
+ORDER BY converted_users DESC;
 ```
 
----
+#### Insight 
 
-## 6. Region Insights
-
-**United Kingdom**  
-Largest user base with strong acquisition but clear drop-offs later in the funnel.
-
-**Germany**  
-Lower volume but higher conversion efficiency, indicating strong product–market fit.
-
-**Spain**  
-Weak activation and conversion, suggesting localisation or onboarding issues.
+Some regions generate high signup volume but underperform in conversion, indicating a mismatch between acquisition messaging and product value perception.  
+Other regions convert fewer users overall but demonstrate stronger conversion efficiency, making them ideal candidates for targeted growth investment or feature localisation.
 
 ---
 
-## 7. Recommendations
+## 7. Key Insights and Recommendations from Analysis
 
-- Simplify onboarding.
-- Highlight premium value earlier.
-- Build habit-forming features.
-- Investigate Spain for UX/localisation gaps.
-- Scale acquisition in Germany.
+**Funnel Insights**  
+Activation significantly improves conversion likelihood, yet it does not guarantee long-term retention.  
+This highlights the need for stronger post-activation nudges, habit-building features, and value reinforcement early in the user lifecycle.
 
----
-
-## 8. Conclusion
-
-This SQL analysis builds a clear, measurable view of a freemium product’s funnel.
-While acquisition is strong, meaningful challenges exist in activation, conversion, and long-term retention.
-Regional analysis highlights where the product performs well and where targeted improvements are needed.
-
-These SQL-driven insights form the foundation for the companion Power BI dashboard,
-where they are visualised and enriched with additional feedback data.
+**Regional Insights**  
+Regional discrepancies suggest that user behaviour is influenced by market-specific expectations.  
+Optimising onboarding flows, pricing strategies, or feature emphasis by region could materially improve overall conversion performance.
 
 ---
 
-## 9. What I Learned
+## 8. Limitations & Scope
+
+- Feedback and satisfaction metrics were not available in the SQL dataset.
+- Retention analysis is limited to a 30-day window.
+- Behavioural context (session depth, feature usage) is outside the scope of this SQL analysis.
+
+These gaps are intentionally addressed in the Power BI dashboard using additional data sources.
+
+---
+
+## 9. Conclusion
+
+This project demonstrates how SQL can be used as a foundational analytics layer to drive product decision-making.  
+By translating raw user data into structured funnel and regional insights, the analysis highlights where growth is constrained and where optimisation efforts should be prioritised.
+
+The outputs of this project directly feed into the companion Power BI dashboard, where stakeholders can explore trends visually and monitor KPIs at scale.  
+Together, both projects showcase an end-to-end analytics workflow—from raw data to executive insight.
+
+### 9.1. What I Learned
 
 - Designing funnel KPIs in SQL.
 - Analysing user behaviour stage by stage.
 - Applying regional segmentation.
 - Preparing SQL outputs for BI tools.
 
----
 
 ## 10. Repository Structure
 
@@ -145,15 +175,22 @@ where they are visualised and enriched with additional feedback data.
 ├── README.md
 ├── sql/
 │   └── SQL_Queries.sql
-├── funnel.png
-└── assets/
+├── images/
+     └── funnel.png
 ```
 
 ---
 
-## 11. How to Run
+## 9. How to Run
 
 1. Load the dataset into PostgreSQL.
 2. Query the `conversion_funnel_enriched` table.
 3. Run the SQL analysis queries.
 4. Export results to Power BI.
+
+---
+
+## 10. Related Project
+
+➡️ **Power BI Dashboard (Visual Analytics & Feedback Insights)**  
+https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard
