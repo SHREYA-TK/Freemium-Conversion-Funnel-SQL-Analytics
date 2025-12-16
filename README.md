@@ -1,5 +1,5 @@
-
-# Freemium Conversion Funnel — A complete SQL-driven analysis of a freemium product’s user journey. 
+# Introduction
+## A complete SQL-driven analysis of a freemium product’s user journey. 
 
 This project focuses on analysing a freemium product’s conversion funnel (**Signup → Activation → Conversion → 30-Day Retention**) with the goal of understanding how users progress from signup to activation, conversion, and retention. The analysis was designed to replicate a real-world product analytics scenario where PostgreSQL is used as the primary tool to extract insights from raw user-level data. 
 This project models the conversion funnel, calculates core product KPIs, and uncovers actionable insights that powers a companion Power BI dashboard.
@@ -150,6 +150,7 @@ These gaps are intentionally addressed in the Power BI dashboard using additiona
 ## 9. Conclusion
 
 This project demonstrates how SQL can be used as a foundational analytics layer to drive product decision-making. 
+
 Using PostgreSQL, I wrote SQL queries to calculate funnel metrics, identify drop-off points between key lifecycle stages, and compare performance across regions. The analysis includes conditional aggregations, grouping logic, and structured queries to ensure the results are accurate, interpretable, and suitable for downstream reporting.
 By translating raw user data into structured funnel and regional insights, the analysis highlights where growth is constrained and where optimisation efforts should be prioritised.
 
