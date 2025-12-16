@@ -1,7 +1,8 @@
 # Introduction
 ## A complete SQL-driven analysis of a freemium product’s user journey. 
 
-This project focuses on analysing a freemium product’s conversion funnel (**Signup → Activation → Conversion → 30-Day Retention**) with the goal of understanding how users progress from signup to activation, conversion, and retention. 
+This project focuses on analysing a freemium product’s conversion funnel (**Signup → Activation → Conversion → 30-Day Retention**) with the goal of understanding how users progress from signup to activation, conversion, and retention.
+
 The analysis was designed to replicate a real-world product analytics scenario where PostgreSQL is used as the primary tool to extract insights from raw user-level data. 
 This project models the conversion funnel, calculates core product KPIs, and uncovers actionable insights that powers a companion Power BI dashboard.
 
