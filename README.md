@@ -168,7 +168,7 @@ This project also strengthened my ability to structure SQL queries in a way that
 
 ## 10. How to Run
 
-1. Load the 'conversion_funnel.csv' dataset into PostgreSQL and create an enriched analytical table (conversion_funnel_enriched).
+1. Load the `conversion_funnel.csv` dataset into PostgreSQL and create an enriched analytical table (conversion_funnel_enriched).
 2. Query the `conversion_funnel_enriched` table.
 3. Run the SQL analysis queries.
 4. Export results to Power BI.
