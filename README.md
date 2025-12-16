@@ -1,10 +1,8 @@
 
-# Freemium Conversion Funnel — SQL Analytics
+# Freemium Conversion Funnel — A complete SQL-driven analysis of a freemium product’s user journey. 
 
-A complete SQL-driven analysis of a freemium product’s user journey.  
-This project models the conversion funnel (**Signup → Activation → Conversion → 30-Day Retention**), calculates core product KPIs, and uncovers actionable insights that power a companion Power BI dashboard.
-
----
+This project focuses on analysing a freemium product’s conversion funnel (**Signup → Activation → Conversion → 30-Day Retention**) with the goal of understanding how users progress from signup to activation, conversion, and retention. The analysis was designed to replicate a real-world product analytics scenario where PostgreSQL is used as the primary tool to extract insights from raw user-level data. 
+This project models the conversion funnel, calculates core product KPIs, and uncovers actionable insights that powers a companion Power BI dashboard.
 
 ## Companion Power BI Project
 🔗 https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard
@@ -17,12 +15,10 @@ Those insights are explored exclusively in the Power BI project, which uses an a
 
 ## 1. Project Overview
 
-Freemium products depend heavily on smooth user progression from signup to long-term retention.  
-This project focuses on understanding funnel health, identifying where users drop off, and comparing regional performance using SQL as the analytical truth layer.
+Freemium products depend heavily on smooth user progression from signup to long-term retention. This project focuses on understanding funnel health, identifying where users drop off, and comparing regional performance using SQL as the analytical truth layer.
 
 SQL outputs from this project are later used by Power BI to create visual storytelling.
 
----
 
 ## 2. Dataset Description
 
@@ -35,7 +31,7 @@ The dataset represents user-level activity for a freemium digital product and in
 
 Each row represents a unique user and their journey stage within the product lifecycle.
 
----
+
 
 ## 3. Key Business Questions
 
@@ -105,7 +101,6 @@ While the product attracts a healthy number of signups, a significant drop occur
 This indicates that onboarding alone is not sufficient to drive monetisation.  
 The most severe drop-off is observed at the retention stage, suggesting weak habit formation or insufficient post-conversion engagement mechanisms.
 
----
 
 ### 6.2 Regional Performance Analysis
 
@@ -140,7 +135,7 @@ This highlights the need for stronger post-activation nudges, habit-building fea
 Regional discrepancies suggest that user behaviour is influenced by market-specific expectations.  
 Optimising onboarding flows, pricing strategies, or feature emphasis by region could materially improve overall conversion performance.
 
----
+
 
 ## 8. Limitations & Scope
 
@@ -154,43 +149,29 @@ These gaps are intentionally addressed in the Power BI dashboard using additiona
 
 ## 9. Conclusion
 
-This project demonstrates how SQL can be used as a foundational analytics layer to drive product decision-making.  
+This project demonstrates how SQL can be used as a foundational analytics layer to drive product decision-making. 
+Using PostgreSQL, I wrote SQL queries to calculate funnel metrics, identify drop-off points between key lifecycle stages, and compare performance across regions. The analysis includes conditional aggregations, grouping logic, and structured queries to ensure the results are accurate, interpretable, and suitable for downstream reporting.
 By translating raw user data into structured funnel and regional insights, the analysis highlights where growth is constrained and where optimisation efforts should be prioritised.
 
-The outputs of this project directly feed into the companion Power BI dashboard, where stakeholders can explore trends visually and monitor KPIs at scale.  
-Together, both projects showcase an end-to-end analytics workflow—from raw data to executive insight.
+The outputs from this SQL analysis serve as the analytical foundation for a companion Power BI dashboard, where the same KPIs are visualised for stakeholder consumption. Together, the SQL and Power BI projects demonstrate an end-to-end analytics workflow, from raw data extraction to insight communication and decision support.
 
 ### 9.1. What I Learned
 
-- Designing funnel KPIs in SQL.
-- Analysing user behaviour stage by stage.
-- Applying regional segmentation.
-- Preparing SQL outputs for BI tools.
+Through this project, I learned how to approach SQL analysis from a product and business perspective rather than treating it as a purely technical exercise. I gained experience in designing meaningful funnel KPIs that reflect real user behaviour across signup, activation, conversion, and retention stages.
 
+I developed the ability to analyse user journeys stage by stage, identify drop-off points, and reason about why those drop-offs might occur from a product perspective. Segmenting performance by region helped me understand how the same product can behave differently across markets and why segmentation is critical for actionable insights.
 
-## 10. Repository Structure
+This project also strengthened my ability to structure SQL queries in a way that produces clean, reliable outputs suitable for downstream BI tools. I learned how to prepare SQL analysis so that it can directly support visualisation, stakeholder reporting, and decision-making in tools like Power BI.
 
-```text
-.
-├── README.md
-├── sql/
-│   └── SQL_Queries.sql
-├── images/
-     └── funnel.png
-```
-
----
-
-## 9. How to Run
+## 10. How to Run
 
 1. Load the dataset into PostgreSQL.
 2. Query the `conversion_funnel_enriched` table.
 3. Run the SQL analysis queries.
 4. Export results to Power BI.
 
----
 
-## 10. Related Project
+## 11. Related Project
 
 ➡️ **Power BI Dashboard (Visual Analytics & Feedback Insights)**  
 https://github.com/SHREYA-TK/Freemium-Conversion-Funnel--Power-BI-Dashboard
