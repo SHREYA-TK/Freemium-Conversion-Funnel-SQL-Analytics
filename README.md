@@ -11,7 +11,7 @@ This project models the conversion funnel, calculates core product KPIs, and unc
 Feedback insights are **not included** in this SQL analysis because the SQL dataset does not contain user ratings or feedback fields.  
 Those insights are explored exclusively in the Power BI project, which uses an additional feedback table imported directly into Power BI.
 
----
+
 
 ## 1. Project Overview
 
